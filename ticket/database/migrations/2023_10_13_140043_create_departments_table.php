@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name',80);
+          //  $table->string('slug',170);
+          //  $table->enum('status',['0','1'])->default('1');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
