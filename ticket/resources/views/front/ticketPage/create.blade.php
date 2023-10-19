@@ -10,7 +10,7 @@
         <div class="form-row">
             <div class="row">
                 <div class="col-lg-12">
-                    <form action="#" method="post">
+                    <form action="{{route('ticket_store')}}" method="post">
                         @csrf
                         <select class="custom-select font-size-16 width-full" name="department" id="department" onchange="departmanChange()" required="">
                             <option value="">Departman Seçiniz</option>

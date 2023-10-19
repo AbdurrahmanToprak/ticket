@@ -26,22 +26,31 @@
             <tr>
 
                 <td>#</td>
-                <td>name</td>
-                <td>subject</td>
-                <td>message</td>
+                <td>ad</td>
+                <td>konu</td>
+                <td>mesaj</td>
+                <td>geçen süre</td>
 
             </tr>
+
             @foreach($tickets as $ticket)
+
                 <tr>
                     <td>{{$ticket->id}}</td>
                     <td>{{$ticket->name}}</td>
                     <td>{{$ticket->subject}}</td>
-                    <td>{{$ticket->message}}</td>
+                    <td>{{Str::limit($ticket->message,7)}}</td>
                     <td>
-                        <a href="{{route('ticket_show',$ticket->uuid)}}" class="btn btn-info">Detay</a>
+                        {{$ticket->updated_at->diffForHumans()}}
                     </td>
+                    <td>
+                        <a href="{{route('ticket_show',$ticket->uuid)}}" class="btn btn-success">Detay</a>
+                        <a class="btn btn-info" href="{{route('ticket_edit',$ticket->uuid)}}">Güncelle</a>
+                        <a class="btn btn-danger" onclick="return confirm('Emin misiniz?')" href="{{route('ticket_delete',$ticket->uuid)}}">Sil</a>
+                    </td>
+
                 </tr>
-            @endforeach
+                @endforeach
             </thead>
         </table>
     </div>
@@ -60,10 +69,10 @@
 
             </div>
         @endforeach
-        <div class="d-flex justify-content-center">
-            {{$tickets->links()}}
+     <!--   <div class="d-flex justify-content-center">
+            $tickets->links()}}
         </div>
-
+-->
     @else
         <div class="alert alert-danger">
             Henüz Kaydetmediniz.

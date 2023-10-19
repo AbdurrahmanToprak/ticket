@@ -14,19 +14,22 @@ use App\Http\Controllers\Frontend\TicketController;
 */
 
 
-
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+
     Route::get('/admin/show', function () {
         return view('admin.pages.show');
     })->name('show');
     Route::get('/index',[TicketController::class,'index'])->name('ticket_index');
     Route::get('/create',[TicketController::class,'create'])->name('ticket_create');
-    Route::get('/show',[TicketController::class,'show'])->name('ticket_show');
+    Route::post('/store',[TicketController::class,'store'])->name('ticket_store');
+    Route::get('/show/{uuid}',[TicketController::class,'show'])->name('ticket_show');
+    Route::get('/edit/{uuid}',[TicketController::class,'edit'])->name('ticket_edit');
+    Route::get('/delete/{uuid}',[TicketController::class,'destroy'])->name('ticket_delete');
 });
