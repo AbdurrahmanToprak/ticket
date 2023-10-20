@@ -1,4 +1,4 @@
-@extends('front.layout.app')
+@extends('superadmin.layout.app')
 @section('content')
 
     <a class="btn btn-primary" href="{{route('ticket_create')}}">Ticket Oluştur</a><br><br>
@@ -19,9 +19,9 @@
 
         </div>
     @endif
-    <h1>Taleplerim</h1><br>
+    <h1>Talepler</h1><br>
     <div class="col-12">
-        <table id="blogstable" class="table table-hover">
+        <table id="tickettable" class="table table-hover">
             <thead>
             <tr>
 
@@ -46,11 +46,12 @@
                     <td>
                         <a href="{{route('ticket_show',$ticket->uuid)}}" class="btn btn-success">Detay</a>
                         <a class="btn btn-info" href="{{route('ticket_edit',$ticket->uuid)}}">Güncelle</a>
-                        <a class="btn btn-danger" onclick="return confirm('Emin misiniz?')" href="{{route('ticket_delete',$ticket->uuid)}}">Sil</a>
+                        <a class="btn btn-danger" onclick="return confirm('Emin misiniz?')"
+                           href="{{route('ticket_delete',$ticket->uuid)}}">Sil</a>
                     </td>
 
                 </tr>
-                @endforeach
+            @endforeach
             </thead>
         </table>
     </div>
@@ -69,13 +70,13 @@
 
             </div>
         @endforeach
-     <!--   <div class="d-flex justify-content-center">
+        <!--   <div class="d-flex justify-content-center">
             $tickets->links()}}
         </div>
 -->
     @else
         <div class="alert alert-danger">
-            Henüz Kaydetmediniz.
+            Henüz Kaydedilmedi.
         </div>
     @endif
 

@@ -36,28 +36,28 @@
     <!-- Page Content -->
     <main>
         <div class="display: inline-block  p-3 bg-light " style="width: 280px;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                <span class="fs-4">Sidebar</span>
+                <span class="fs-4">SuperAdmin-Panel</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
+                    <a href="{{route('superadmin_index')}}" class="nav-link active" aria-current="page">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="{{route('superadmin_ticket_index')}}" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                        Dashboard
+                        Talepler
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="{{route('user_index')}}" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                        Orders
+                        Kullanıcılar
                     </a>
                 </li>
                 <li>
