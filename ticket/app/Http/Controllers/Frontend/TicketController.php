@@ -16,9 +16,9 @@ class TicketController extends Controller
     public function index()
     {
         $loggedInName = Auth::user()->name;
-       // $id = Auth::user()->id;
-       // $tickets = Ticket::query()->where('user_id',$id)->latest('updated_at')->paginate(2);
-        $tickets = Ticket::query()->get();
+        $id = Auth::user()->id;
+        $tickets = Ticket::query()->where('user_id',$id)->latest('updated_at')->paginate(2);
+       // $tickets = Ticket::query()->get();
 
         return view('front.ticketPage.index',compact('tickets','loggedInName'));
     }

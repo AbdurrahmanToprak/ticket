@@ -88,7 +88,7 @@
                 </ul>
             </div>
         </div>
-        <div class="display: inline-block " style="width: 1600px">@yield('content')</div>
+        <div class="display: inline-block position-absolute mt-4 " style="width: 1600px">@yield('content')</div>
     </main>
 </div>
 
