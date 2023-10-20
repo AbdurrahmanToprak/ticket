@@ -20,6 +20,7 @@ class SATicketController extends Controller
         // $tickets = Ticket::query()->where('user_id',$id)->latest('updated_at')->paginate(2);
         $tickets = Ticket::query()->get();
 
+        $user = Ticket::query()->where('user_id');
         return view('superadmin.ticket.index',compact('tickets','loggedInName'));
     }
 

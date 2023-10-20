@@ -1,7 +1,12 @@
 @extends('superadmin.layout.app')
 @section('content')
-
-    <a class="btn btn-primary" href="{{route('user_create')}}">Kullanıcı Oluştur</a><br><br>
+    <div class="py-6">
+        <div class="mx-auto sm:p-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
+                <div class="p-6 bg-white border-b border-gray-200">
+    <div class="flex justify-content-end">
+        <a class="btn btn-primary" href="{{route('ticket_create')}}">Kullanıcı Oluştur</a><br>
+    </div>
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{session('success')}}
@@ -54,6 +59,9 @@
             </thead>
         </table>
     </div>
-
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 

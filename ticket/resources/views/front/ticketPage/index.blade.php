@@ -1,7 +1,9 @@
 @extends('front.layout.app')
 @section('content')
 
-    <a class="btn btn-primary" href="{{route('ticket_create')}}">Ticket Oluştur</a><br><br>
+    <div class="flex justify-content-end">
+        <a class="btn btn-primary" href="{{route('ticket_create')}}">Ticket Oluştur</a><br>
+    </div>
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{session('success')}}
