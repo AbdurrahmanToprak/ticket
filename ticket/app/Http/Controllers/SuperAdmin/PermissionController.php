@@ -21,7 +21,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('superadmin.permissions.create');
     }
 
     /**
@@ -29,7 +29,17 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $permission = $request->validate(
+            [
+                'name' => ['required' , 'min:3']
+            ],
+            [
+                'name.min'=>'İzin adı en az 3 haneli olmalıdır.',
+                'name.required' => 'İzin adı boş bırakılamaz.'
+            ]);
+        Permission::create($permission);
+
+        return to_route('permission_index');
     }
 
     /**

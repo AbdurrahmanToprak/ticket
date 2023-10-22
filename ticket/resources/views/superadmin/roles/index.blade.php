@@ -5,7 +5,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-content-end">
-                        <a class="btn btn-primary" href="{{route('ticket_create')}}">Rol Oluştur</a><br>
+                        <a class="btn btn-primary" href="{{route('role_create')}}">Rol Oluştur</a><br>
                     </div>
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -30,9 +30,9 @@
                             <thead>
                             <tr>
 
-                                <td>#</td>
-                                <td>ad</td>
-                                <td>-</td>
+                                <td><strong>#</strong></td>
+                                <td><strong>ad</strong></td>
+
 
                             </tr>
                             </thead>
@@ -42,9 +42,12 @@
                                     <td>{{$role->id}}</td>
                                     <td>{{$role->name}}</td>
                                     <td>
-                                        <a class="btn btn-info" href="#">Güncelle</a>
-                                        <a class="btn btn-danger" onclick="return confirm('Emin misiniz?')"
-                                           href="#">Sil</a>
+                                        <div class="flex justify-content-end">
+                                            <a class="btn btn-info mx-1" href="#">Güncelle</a>
+                                            <a class="btn btn-danger mx-1" onclick="return confirm('Emin misiniz?')"
+                                               href="#">Sil</a>
+                                        </div>
+
                                     </td>
                                 </tr>
                             @endforeach

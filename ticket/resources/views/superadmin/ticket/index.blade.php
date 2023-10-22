@@ -30,12 +30,12 @@
             <thead>
             <tr>
 
-                <td>#</td>
-                <td>kullanıcı id</td>
-                <td>ad</td>
-                <td>konu</td>
-                <td>mesaj</td>
-                <td>geçen süre</td>
+                <td><strong>#</strong></td>
+                <td><strong>kullanıcı id</strong></td>
+                <td><strong>ad</strong></td>
+                <td><strong>konu</strong></td>
+                <td><strong>mesaj</strong></td>
+                <td><strong>geçen süre</strong></td>
 
             </tr>
 
@@ -53,10 +53,12 @@
                     {{$ticket->updated_at->diffForHumans()}}
                 </td>
                 <td>
-                    <a href="{{route('ticket_show',$ticket->uuid)}}" class="btn btn-success">Detay</a>
-                    <a class="btn btn-info" href="{{route('ticket_edit',$ticket->uuid)}}">Güncelle</a>
-                    <a class="btn btn-danger" onclick="return confirm('Emin misiniz?')"
-                       href="{{route('ticket_delete',$ticket->uuid)}}">Sil</a>
+                    <div class="flex justify-content-end">
+                        <a href="{{route('ticket_show',$ticket->uuid)}}" class="btn btn-success mx-1">Detay</a>
+                        <a class="btn btn-info mx-1" href="#">Güncelle</a>
+                        <a class="btn btn-danger mx-1" onclick="return confirm('Emin misiniz?')"
+                           href="#">Sil</a>
+                    </div>
                 </td>
 
             </tr>

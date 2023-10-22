@@ -30,11 +30,11 @@
             <thead>
             <tr>
 
-                <td>#</td>
-                <td>ad</td>
-                <td>email</td>
-                <td>şifre</td>
-                <td>geçen süre</td>
+                <td><strong>#</strong></td>
+                <td><strong>ad</strong></td>
+                <td><strong>email</strong></td>
+                <td><strong>şifre</strong></td>
+                <td><strong>geçen süre</strong></td>
 
             </tr>
 
@@ -49,9 +49,11 @@
                         {{$user->updated_at->diffForHumans()}}
                     </td>
                     <td>
-                        <a class="btn btn-info" href="{{route('user_edit',$user->id)}}">Güncelle</a>
-                        <a class="btn btn-danger" onclick="return confirm('Emin misiniz?')"
-                           href="{{route('user_delete',$user->id)}}">Sil</a>
+                        <div class="flex justify-content-end">
+                            <a class="btn btn-info mx-1" href="#">Güncelle</a>
+                            <a class="btn btn-danger mx-1" onclick="return confirm('Emin misiniz?')"
+                               href="#">Sil</a>
+                        </div>
                     </td>
 
                 </tr>

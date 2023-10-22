@@ -21,7 +21,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('superadmin.roles.create');
     }
 
     /**
@@ -29,7 +29,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = $request->validate(
+            [
+                'name' => ['required' , 'min:3']
+            ],
+            [
+                'name.min'=>'Rol adı en az 3 haneli olmalıdır.',
+                'name.required' => 'Rol adı boş bırakılamaz.'
+            ]);
+        Role::create($role);
+
+        return to_route('role_index');
     }
 
     /**
