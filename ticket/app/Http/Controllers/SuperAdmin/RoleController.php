@@ -12,7 +12,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::whereNotIn('name', ['Super-Admin'])->get();
         return view('superadmin.roles.index',compact('roles'));
     }
 
@@ -39,7 +39,7 @@ class RoleController extends Controller
             ]);
         Role::create($role);
 
-        return to_route('role_index')->with('success','Role başarıyla oluşturuldu.');
+        return to_route('superadmin.roles.index')->with('success','Role başarıyla oluşturuldu.');
     }
 
     /**
@@ -53,18 +53,17 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        $role = Role::where('id',$id)->first();
         return view('superadmin.roles.edit',compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, Role $role)
     {
-        $request->validate(
+        $roles = $request->validate(
             [
                 'name' => ['required' , 'min:3']
             ],
@@ -72,21 +71,17 @@ class RoleController extends Controller
                 'name.min'=>'Rol adı en az 3 haneli olmalıdır.',
                 'name.required' => 'Rol adı boş bırakılamaz.'
             ]);
-        $role = Role::find($request->id);
+        $role->update($roles);
 
-        $role->name = $request->name;
-
-        $role->save();
-        return redirect()->route('role_index')->with('success','Rol başarıyla güncellendi.');
+        return to_route('superadmin.roles.index')->with('success','Rol başarıyla güncellendi.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        $role = Role::find($id);
         $role->delete();
-        return to_route('role_index')->with('delete','Rol başarıyla silindi.');
+        return back()->with('delete','Rol başarıyla silindi.');
     }
 }

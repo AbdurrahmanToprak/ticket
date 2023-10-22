@@ -39,7 +39,7 @@ class PermissionController extends Controller
             ]);
         Permission::create($permission);
 
-        return to_route('permission_index');
+        return to_route('superadmin.permissions.index');
     }
 
     /**
@@ -53,18 +53,17 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        $permission = Permission::where('id',$id)->first();
         return view('superadmin.permissions.edit',compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request,Permission $permission)
     {
-        $request->validate(
+        $permissions = $request->validate(
             [
                 'name' => ['required' , 'min:3']
             ],
@@ -72,21 +71,18 @@ class PermissionController extends Controller
                 'name.min'=>'Rol adı en az 3 haneli olmalıdır.',
                 'name.required' => 'Rol adı boş bırakılamaz.'
             ]);
-        $permission = Permission::find($request->id);
+        $permission->update($permissions);
 
-        $permission->name = $request->name;
-
-        $permission->save();
-        return redirect()->route('permission_index')->with('success','İzin başarıyla güncellendi.');
+        return to_route('superadmin.permissions.index')->with('success','İzin başarıyla güncellendi.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        $permission =   Permission::find($id);
+
         $permission->delete();
-        return to_route('permission_index')->with('delete','İzin başarıyla silindi.');
+        return back()->with('delete','İzin başarıyla silindi.');
     }
 }

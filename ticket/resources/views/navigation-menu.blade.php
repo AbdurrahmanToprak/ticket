@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @role('Super-Admin')
-                    <x-nav-link href="{{route('superadmin_index')}}" :active="request()->routeIs('superadmin_index')">
+                    <x-nav-link href="{{route('superadmin.index')}}" :active="request()->routeIs('superadmin.index')">
                         {{ __('SuperAdmin') }}
                     </x-nav-link>
                     @endrole

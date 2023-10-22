@@ -5,10 +5,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-content-end">
-                        <a class="btn btn-primary" href="{{route('permission_index')}}">Rolleri Göster</a><br>
+                        <a class="btn btn-primary" href="{{route('superadmin.permissions.index')}}">Rolleri Göster</a><br>
                     </div>
-                    <form action="{{route('permission_update')}}" method="post">
+                    <form action="{{route('superadmin.permissions.update',$permission)}}" method="post">
                         @csrf
+                        @method('PUT')
                         <input type="hidden" name="id" value="{{$permission->id}}">
                         <div class="mb-3">
                             <label class="form-label">İzin Adı</label>

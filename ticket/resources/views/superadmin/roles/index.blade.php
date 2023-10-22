@@ -24,7 +24,7 @@
                         @endif
                     </div>
                     <div class="flex justify-content-end">
-                        <a class="btn btn-primary" href="{{route('role_create')}}">Rol Oluştur</a><br>
+                        <a class="btn btn-primary" href="{{route('superadmin.roles.create')}}">Rol Oluştur</a><br>
                     </div>
 
                     <h1>Roller</h1><br>
@@ -46,9 +46,12 @@
                                     <td>{{$role->name}}</td>
                                     <td>
                                         <div class="flex justify-content-end">
-                                            <a class="btn btn-info mx-1" href="{{route('role_edit',$role->id)}}">Güncelle</a>
-                                            <a class="btn btn-danger mx-1" onclick="return confirm('Emin misiniz?')"
-                                               href="{{route('role_delete',$role->id)}}">Sil</a>
+                                            <a class="btn btn-info mx-1" href="{{route('superadmin.roles.edit',$role->id)}}">Güncelle</a>
+                                            <form action="{{route('superadmin.roles.destroy',$role->id)}}" method="post" onsubmit="return confirm('Emin misiniz?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger mx-1">Sil</button>
+                                            </form>
                                         </div>
 
                                     </td>

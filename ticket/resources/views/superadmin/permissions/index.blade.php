@@ -24,7 +24,7 @@
                         @endif
                     </div>
                     <div class="flex justify-content-end">
-                        <a class="btn btn-primary" href="{{route('permission_create')}}">İzin Oluştur</a><br>
+                        <a class="btn btn-primary" href="{{route('superadmin.permissions.create')}}">İzin Oluştur</a><br>
                     </div>
 
                     <h1>İzinler</h1><br>
@@ -47,9 +47,12 @@
                                     <td>{{$permission->name}}</td>
                                     <td>
                                         <div class="flex justify-content-end">
-                                            <a class="btn btn-info mx-1" href="{{route('permission_edit',$permission->id)}}">Güncelle</a>
-                                            <a class="btn btn-danger mx-1" onclick="return confirm('Emin misiniz?')"
-                                               href="{{route('permission_delete',$permission->id)}}">Sil</a>
+                                            <a class="btn btn-info mx-1" href="{{route('superadmin.permissions.edit',$permission->id)}}">Güncelle</a>
+                                            <form action="{{route('superadmin.permissions.destroy',$permission->id)}}" method="post" onsubmit="return confirm('Emin misiniz?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger mx-1">Sil</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

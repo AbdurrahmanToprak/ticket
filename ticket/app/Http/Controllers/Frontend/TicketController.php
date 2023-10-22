@@ -40,7 +40,7 @@ class TicketController extends Controller
         $ticket->user_id = Auth::user()->id;
         $ticket->department = $request->department;
         $ticket->level = $request->level;
-      //  $ticket->name = $request->name;
+      //  $tickets->name = $request->name;
         $ticket->subject = $request->subject;
         $ticket->message = $request->message;
         $ticket->uuid = Str::uuid();
@@ -58,7 +58,7 @@ class TicketController extends Controller
         $ticket = Ticket::where('uuid',$uuid)->first();
         //$note = Note::find($uuid);
 
-        /*     if($ticket->user_id != Auth::user()->id)
+        /*     if($tickets->user_id != Auth::user()->id)
              {
                  abort(403);
              }*/

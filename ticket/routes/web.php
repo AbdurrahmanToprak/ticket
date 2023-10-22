@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\SuperAdmin\SATicketController;
 use App\Http\Controllers\SuperAdmin\RoleController;
 use App\Http\Controllers\SuperAdmin\PermissionController;
+use App\Http\Controllers\SuperAdmin\SuperAdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,30 +23,33 @@ use App\Http\Controllers\SuperAdmin\PermissionController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth','role:Super-Admin'])->prefix('superadmin')->group(function (){
-    Route::get('/', function(){
-        return view('superadmin.index');
-    })->name('superadmin_index');
-    Route::get('/tickets/index', [SATicketController::class,'index'])->name('superadmin_ticket_index');
-    Route::get('/users', [RegisterController::class,'index'])->name('user_index');
-    Route::get('/users/register', [RegisterController::class,'create'])->name('user_create');
+Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('superadmin')->group(function (){
+
+    Route::get('/', [SuperAdminController::class,'index'])->name('index');
+
+    Route::resource('/tickets',SATicketController::class);
+
+    Route::resource('/users', RegisterController::class);
+
+  /*  Route::get('/users/register', [RegisterController::class,'create'])->name('user_create');
     Route::post('/users/store',[TicketController::class,'store'])->name('user_store');
     Route::get('/users/register/edit/{id}', [RegisterController::class,'edit'])->name('user_edit');
     Route::get('/delete/{id}',[TicketController::class,'destroy'])->name('user_delete');
-
-    Route::get('/roles', [RoleController::class,'index'])->name('role_index');
-    Route::get('/roles/create', [RoleController::class,'create'])->name('role_create');
+*/
+    Route::resource('/roles', RoleController::class);
+  /*  Route::get('/roles/create', [RoleController::class,'create'])->name('role_create');
     Route::post('/roles/store', [RoleController::class,'store'])->name('role_store');
     Route::get('/roles/edit/{id}', [RoleController::class,'edit'])->name('role_edit');
     Route::post('/roles/update', [RoleController::class,'update'])->name('role_update');
     Route::get('/roles/delete/{id}', [RoleController::class,'destroy'])->name('role_delete');
-
-    Route::get('/permissions', [PermissionController::class,'index'])->name('permission_index');
-    Route::get('/permissions/create', [PermissionController::class,'create'])->name('permission_create');
+*/
+    Route::resource('/permissions', PermissionController::class);
+  /*  Route::get('/permissions/create', [PermissionController::class,'create'])->name('permission_create');
     Route::post('/permissions/store', [PermissionController::class,'store'])->name('permission_store');
     Route::get('/permissions/edit/{id}', [PermissionController::class,'edit'])->name('permission_edit');
     Route::post('/permissions/update', [PermissionController::class,'update'])->name('permission_update');
     Route::get('/permissions/delete/{id}', [PermissionController::class,'destroy'])->name('permission_delete');
+  */
 });
 Route::middleware([
     'auth:sanctum',
