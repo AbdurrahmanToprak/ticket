@@ -53,17 +53,31 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $permission = Permission::where('id',$id)->first();
+        return view('superadmin.permissions.edit',compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => ['required' , 'min:3']
+            ],
+            [
+                'name.min'=>'Rol adı en az 3 haneli olmalıdır.',
+                'name.required' => 'Rol adı boş bırakılamaz.'
+            ]);
+        $permission = Permission::find($request->id);
+
+        $permission->name = $request->name;
+
+        $permission->save();
+        return redirect()->route('permission_index')->with('success','İzin başarıyla güncellendi.');
     }
 
     /**

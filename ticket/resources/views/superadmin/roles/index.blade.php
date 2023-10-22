@@ -43,7 +43,7 @@
                                     <td>{{$role->name}}</td>
                                     <td>
                                         <div class="flex justify-content-end">
-                                            <a class="btn btn-info mx-1" href="#">Güncelle</a>
+                                            <a class="btn btn-info mx-1" href="{{route('role_edit',$role->id)}}">Güncelle</a>
                                             <a class="btn btn-danger mx-1" onclick="return confirm('Emin misiniz?')"
                                                href="#">Sil</a>
                                         </div>

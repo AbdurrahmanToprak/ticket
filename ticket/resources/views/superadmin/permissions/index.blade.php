@@ -44,7 +44,7 @@
                                     <td>{{$permission->name}}</td>
                                     <td>
                                         <div class="flex justify-content-end">
-                                            <a class="btn btn-info mx-1" href="#">Güncelle</a>
+                                            <a class="btn btn-info mx-1" href="{{route('permission_edit',$permission->id)}}">Güncelle</a>
                                             <a class="btn btn-danger mx-1" onclick="return confirm('Emin misiniz?')"
                                                href="#">Sil</a>
                                         </div>
