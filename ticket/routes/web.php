@@ -31,6 +31,11 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
 
     Route::resource('/users', UserController::class);
     Route::delete('/users/{user}' , [UserController::class , 'destroy'])->name('users.destroy');
+    Route::get('/users/{user}', [UserController::class,'show'])->name('users.show');
+    Route::post('/users/{user}/permissions' , [UserController::class , 'givePermission'])->name('users.permissions');
+    Route::delete('/users/{user}/permissions/{permission}' , [UserController::class , 'revokePermission'])->name('users.permissions.revoke');
+    Route::post('/users/{user}/roles' , [UserController::class , 'assignRole'])->name('users.roles');
+    Route::delete('/users/{user}/roles/{role}' , [UserController::class , 'removeRole'])->name('users.roles.remove');
 
 
   /*  Route::get('/users/register', [SARegisterController::class,'create'])->name('user_create');

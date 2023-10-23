@@ -50,8 +50,7 @@
                     </td>
                     <td>
                         <div class="flex justify-content-end">
-                            <a class="btn btn-info mx-1" href="#">Roller</a>
-                            <a class="btn btn-info mx-1" href="#">İzinler</a>
+                            <a class="btn btn-info mx-1" href="{{route('superadmin.users.show',$user->id)}}">Roller</a>
                             <a class="btn btn-info mx-1" href="{{route('superadmin.users.edit',$user->id)}}">Güncelle</a>
                             <form action="{{route('superadmin.users.destroy',$user->id)}}" method="post" onsubmit="return confirm('Emin misiniz?')">
                                 @csrf

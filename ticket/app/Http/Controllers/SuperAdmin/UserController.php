@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -55,9 +56,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('superadmin.users.role',compact('user','roles','permissions'));
     }
 
     /**
@@ -85,5 +88,41 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    //Permission
+    public function givePermission(Request $request, User $user)
+    {
+        if($user->hasPermissionTo($request->permission)){
+            return back()->with('delete','İzin zaten verilmiş.');
+        }
+        $user->givePermissionTo($request->permission);
+        return back()->with('success','İzin başarıyla eklendi.');
+    }
+    public function revokePermission(User $user, Permission $permission)
+    {
+        if($user->hasPermissionTo($permission)){
+            $user->revokePermissionTo($permission);
+            return back()->with('success','İzin başarıyla çıkarıldı.');
+        }
+        return back()->with('delete','İzin çıkarılamadı.');
+    }
+
+    //Role
+    public function assignRole(Request $request, User $user)
+    {
+        if($user->hasRole($request->role)){
+            return back()->with('delete','Rol zaten verilmiş.');
+        }
+        $user->assignRole($request->role);
+        return back()->with('success','Rol başarıyla eklendi.');
+    }
+    public function removeRole(User $user, Role $role)
+    {
+        if($user->hasRole($role)){
+            $user->removeRole($role);
+            return back()->with('success','Rol başarıyla çıkarıldı.');
+        }
+        return back()->with('delete','Rol çıkarılamadı.');
     }
 }
