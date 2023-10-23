@@ -7,7 +7,7 @@ use App\Http\Controllers\SuperAdmin\RoleController;
 use App\Http\Controllers\SuperAdmin\SATicketController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SuperAdmin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +29,9 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
 
     Route::resource('/tickets',SATicketController::class);
 
-    Route::resource('/users', SARegisterController::class);
+    Route::resource('/users', UserController::class);
+    Route::delete('/users/{user}' , [UserController::class , 'destroy'])->name('users.destroy');
+
 
   /*  Route::get('/users/register', [SARegisterController::class,'create'])->name('user_create');
     Route::post('/users/store',[TicketController::class,'store'])->name('user_store');
