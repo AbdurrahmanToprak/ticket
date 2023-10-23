@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\TicketController;
-use App\Http\Controllers\Admin\RegisterController;
-use App\Http\Controllers\Admin\AdminTicketController;
-use App\Http\Controllers\SuperAdmin\SATicketController;
-use App\Http\Controllers\SuperAdmin\RoleController;
 use App\Http\Controllers\SuperAdmin\PermissionController;
+use App\Http\Controllers\SuperAdmin\SARegisterController;
+use App\Http\Controllers\SuperAdmin\RoleController;
+use App\Http\Controllers\SuperAdmin\SATicketController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,11 +29,11 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
 
     Route::resource('/tickets',SATicketController::class);
 
-    Route::resource('/users', RegisterController::class);
+    Route::resource('/users', SARegisterController::class);
 
-  /*  Route::get('/users/register', [RegisterController::class,'create'])->name('user_create');
+  /*  Route::get('/users/register', [SARegisterController::class,'create'])->name('user_create');
     Route::post('/users/store',[TicketController::class,'store'])->name('user_store');
-    Route::get('/users/register/edit/{id}', [RegisterController::class,'edit'])->name('user_edit');
+    Route::get('/users/register/edit/{id}', [SARegisterController::class,'edit'])->name('user_edit');
     Route::get('/delete/{id}',[TicketController::class,'destroy'])->name('user_delete');
 */
     Route::resource('/roles', RoleController::class);
@@ -50,6 +50,9 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
     Route::post('/permissions/update', [PermissionController::class,'update'])->name('permission_update');
     Route::get('/permissions/delete/{id}', [PermissionController::class,'destroy'])->name('permission_delete');
   */
+    Route::post('/role/{role}/permissions' , [RoleController::class , 'givePermission'])->name('roles.permissions');
+    Route::delete('/role/{role}/permissions/{permission}' , [RoleController::class , 'revokePermission'])->name('roles.permissions.revoke');
+
 });
 Route::middleware([
     'auth:sanctum',
