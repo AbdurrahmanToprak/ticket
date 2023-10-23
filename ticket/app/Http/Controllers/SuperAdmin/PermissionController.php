@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 class PermissionController extends Controller
 {
     /**
@@ -55,7 +56,8 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        return view('superadmin.permissions.edit',compact('permission'));
+        $roles = Role::all();
+        return view('superadmin.permissions.edit',compact('permission','roles'));
     }
 
     /**
@@ -85,4 +87,21 @@ class PermissionController extends Controller
         $permission->delete();
         return back()->with('delete','İzin başarıyla silindi.');
     }
+    public function assignRole(Request $request, Permission $permission)
+    {
+        if($permission->hasRole($request->role)){
+            return back()->with('delete','Rol zaten verilmiş.');
+        }
+        $permission->assignRole($request->role);
+        return back()->with('success','Rol başarıyla eklendi.');
+    }
+    public function removeRole(Permission $permission, Role $role)
+    {
+        if($permission->hasRole($role)){
+            $permission->removeRole($role);
+            return back()->with('success','Rol başarıyla çıkarıldı.');
+        }
+        return back()->with('delete','Rol çıkarılamadı.');
+    }
+
 }

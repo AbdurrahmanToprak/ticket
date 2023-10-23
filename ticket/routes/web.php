@@ -52,6 +52,8 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
   */
     Route::post('/role/{role}/permissions' , [RoleController::class , 'givePermission'])->name('roles.permissions');
     Route::delete('/role/{role}/permissions/{permission}' , [RoleController::class , 'revokePermission'])->name('roles.permissions.revoke');
+    Route::post('/permission/{permission}/roles' , [PermissionController::class , 'assignRole'])->name('permissions.roles');
+    Route::delete('/permission/{permission}/roles/{role}' , [PermissionController::class , 'removeRole'])->name('permissions.roles.remove');
 
 });
 Route::middleware([

@@ -24,7 +24,7 @@
                     <div class="flex justify-content-end">
                         <a class="btn btn-primary" href="{{route('superadmin.roles.index')}}">Rolleri Göster</a><br>
                     </div>
-                    <div class="max-w-xl">
+                    <div class="max-w-xl mt-3 p-2 bg-gray-100">
                         <form action="{{route('superadmin.roles.update',$role)}}" method="post">
                             @csrf
                             @method('PUT')
@@ -43,10 +43,10 @@
 
                         </form>
                     </div>
-                    <div class="max-w-xl">
+                    <div class="max-w-xl mt-6 p-2 bg-gray-100">
                         <div class="mt-6 p-2">
                             <h2 class="text-2xl font-semibold">Rol İzinleri</h2>
-                            <div class="max-w-xl mt-6">
+                            <div class="flex space-x-8 mt-4">
                                 @if($role->permissions)
                                     @foreach($role->permissions as $role_permission)
                                         <form action="{{route('superadmin.roles.permissions.revoke',[$role->id,$role_permission->id])}}" method="post" onsubmit="return confirm('Emin misiniz?')">
@@ -60,14 +60,13 @@
                         <form action="{{route('superadmin.roles.permissions',$role->id)}}" method="post">
                             @csrf
                                 <div class="my-3">
-                                    <label class="form-label">İzinler</label>
+                                    <label for="permission" class="form-label">İzinler</label>
                                     <select name="permission" class="form-control" id="permission">
                                         @foreach($permissions as $permission)
                                             <option value="{{$permission->name}}">{{$permission->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
                             <div class="sm:col-span-6 pt-3">
                                 <button type="submit" class="btn btn-primary">İzni Ata</button>
                             </div>
