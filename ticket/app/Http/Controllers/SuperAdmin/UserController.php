@@ -66,9 +66,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
+
         $roles = Role::all();
 
         return view('superadmin.users.edit',compact('user','roles'));
@@ -77,17 +77,34 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $users = $request->validate(
+            [
+                'name' => ['required' , 'min:3'],
+                'email' => ['required' , 'email'],
+                'password' => ['required', 'min:8']
+            ],
+            [
+                'name.min'=>'Rol adı en az 3 haneli olmalıdır.',
+                'name.required' => 'Rol adı boş bırakılamaz.',
+                'email.required' => 'E-mail alanı boş bırakılamaz.',
+                'email.email' => 'Lütfen geçerli e-mail adresi giriniz.',
+                'password.required' => 'Şifre alanı boş bırakılamaz.',
+                'password.min' => 'Şifre en az 8 karakter olmalıdır.',
+            ]);
+        $user->update($users);
+
+        return to_route('superadmin.users.index')->with('success','Kullanıcı bilgileri başarıyla güncellendi.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return to_route('superadmin.users.index')->with('delete','Kullanıcı başarıyla silindi.');
     }
 
     //Permission
