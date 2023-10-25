@@ -65,6 +65,7 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
     Route::delete('/permission/{permission}/roles/{role}' , [PermissionController::class , 'removeRole'])->name('permissions.roles.remove');
 
 });
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -73,10 +74,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/userhome', function () {
+        return view('front.index');
+    })->name('user_home');
     Route::get('/index',[TicketController::class,'index'])->name('ticket_index');
     Route::get('/create',[TicketController::class,'create'])->name('ticket_create');
     Route::post('/store',[TicketController::class,'store'])->name('ticket_store');
-    Route::get('/show/{uuid}',[TicketController::class,'show'])->name('ticket_show');
-    Route::get('/edit/{uuid}',[TicketController::class,'edit'])->name('ticket_edit');
-    Route::get('/delete/{uuid}',[TicketController::class,'destroy'])->name('ticket_delete');
+    Route::get('/show/{id}',[TicketController::class,'show'])->name('ticket_show');
+    Route::get('/edit/{id}',[TicketController::class,'edit'])->name('ticket_edit');
+    Route::post('/update',[TicketController::class,'update'])->name('ticket_update');
+    Route::get('/delete/{id}',[TicketController::class,'destroy'])->name('ticket_delete');
 });
