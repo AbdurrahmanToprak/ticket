@@ -59,9 +59,13 @@ class SATicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($uuid)
+    public function show($id)
     {
-        //
+        $ticket = Ticket::query()->where('id',$id)->first();
+        $departments = Department::all();
+        $levels = Level::all();
+        $users = User::all();
+        return view('superadmin.tickets.show',compact('ticket','departments','levels','users'));
     }
 
     /**

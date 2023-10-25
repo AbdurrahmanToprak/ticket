@@ -1,6 +1,9 @@
 @extends('superadmin.layout.app')
 @section('content')
-
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:p-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
+                <div class="p-6 bg-white border-b border-gray-200">
     <div class="flex justify-content-end">
         <a class="btn btn-primary" href="{{route('superadmin.tickets.create')}}">Ticket Oluştur</a><br>
     </div>
@@ -74,13 +77,14 @@
                             </form>
 
                         </td>
-                        <td>{{$ticket->subject}}</td>
+                        <td>{{Str::limit($ticket->subject,10)}}</td>
                         <td>{{Str::limit($ticket->message,7)}}</td>
                         <td>
                             {{$ticket->updated_at->diffForHumans()}}
                         </td>
                         <td>
-                            <div class="m-2 mt-2">
+                            <div class="flex justify-content-end">
+                                <a class="btn btn-success mx-1" href="{{route('superadmin.tickets.show',$ticket->id)}}">Detay</a>
                                 <form action="{{route('superadmin.tickets.destroy',$ticket)}}" method="post" onsubmit="return confirm('Emin misiniz?')">
                                     @csrf
                                     @method('DELETE')
@@ -100,6 +104,9 @@
             Henüz Kaydetmediniz.
         </div>
     @endif
-
+                    </div>
+            </div>
+            </div>
+        </div>
 @endsection
 
