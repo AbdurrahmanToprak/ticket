@@ -5,7 +5,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
                 <div class="p-6 bg-white border-b border-gray-200">
     <div class="flex justify-content-end">
-        <a class="btn btn-primary" href="{{route('superadmin.tickets.create')}}">Ticket Oluştur</a><br>
+        <a class="btn btn-success mx-1" href="{{route('superadmin.tickets.myTickets')}}">Taleplerim</a>
+        <a class="btn btn-primary" href="{{route('superadmin.tickets.create')}}">Talep Oluştur</a>
     </div>
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -24,7 +25,7 @@
 
         </div>
     @endif
-    <h1>Talepler</h1><br>
+    <h1>Destek Talepleri</h1><br>
     <div class="col-12">
         <table id="blogstable" class="table table-hover">
             <thead>
@@ -104,6 +105,7 @@
             Henüz Kaydetmediniz.
         </div>
     @endif
+                    
                     </div>
             </div>
             </div>

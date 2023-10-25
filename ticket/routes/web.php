@@ -29,6 +29,8 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
 
     Route::resource('/tickets',SATicketController::class);
     Route::delete('/tickets/{ticket}' , [SATicketController::class , 'destroy'])->name('tickets.destroy');
+    Route::get('/myTickets',[SATicketController::class,'myTickets'])->name('tickets.myTickets');
+
     Route::resource('/users', UserController::class);
     Route::delete('/users/{user}' , [UserController::class , 'destroy'])->name('users.destroy');
     Route::get('/users/{user}', [UserController::class,'show'])->name('users.show');

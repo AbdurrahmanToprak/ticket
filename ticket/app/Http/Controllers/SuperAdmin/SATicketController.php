@@ -68,6 +68,17 @@ class SATicketController extends Controller
         return view('superadmin.tickets.show',compact('ticket','departments','levels','users'));
     }
 
+    public function myTickets()
+    {
+        $loggedInName = Auth::user()->name;
+        $id = Auth::user()->id;
+        $departments = Department::all();
+        $tickets = Ticket::query()->where('user_id',$id)->latest('updated_at')->paginate(2);
+        // $tickets = Ticket::query()->get();
+        $levels = Level::all();
+        $users = User::all();
+        return view('superadmin.tickets.myTickets',compact('tickets','loggedInName','departments','levels','users'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
