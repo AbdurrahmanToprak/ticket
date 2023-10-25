@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-          //  $table->unsignedBigInteger('department_id')->nullable();
-          //  $table->unsignedBigInteger('level_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('level_id')->nullable();
             $table->uuid('uuid');
             $table->string('department',150)->nullable();
             $table->string('level',150)->nullable();
@@ -28,7 +28,8 @@ return new class extends Migration
         });
         Schema::table('tickets', function($table){
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
-          //  $table->foreign('department_id')->on('departments')->references('id')->onDelete('cascade');
+            $table->foreign('department_id')->on('departments')->references('id')->onDelete('cascade');
+           // $table->foreignId('level_id')->constrained('levels')->onDelete('cascade');
            // $table->foreign('level_id')->on('levels')->references('id')->onDelete('cascade');
         });
     }

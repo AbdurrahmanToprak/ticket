@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Level;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use App\Models\User;
 class SATicketController extends Controller
 {
     /**
@@ -19,9 +21,10 @@ class SATicketController extends Controller
         // $id = Auth::user()->id;
         // $tickets = Ticket::query()->where('user_id',$id)->latest('updated_at')->paginate(2);
         $tickets = Ticket::query()->get();
-
-        $user = Ticket::query()->where('user_id');
-        return view('superadmin.tickets.index',compact('tickets','loggedInName'));
+        $departments = Department::all();
+        $levels =  Level::all();
+        $users = User::all();
+        return view('superadmin.tickets.index',compact('tickets','loggedInName','departments','users','levels'));
     }
 
     /**
@@ -29,7 +32,9 @@ class SATicketController extends Controller
      */
     public function create()
     {
-        return view('front.ticketPage.create');
+        $departments = Department::all();
+        $levels =  Level::all();
+        return view('superadmin.tickets.create',compact('departments','levels'));
     }
 
     /**
@@ -39,15 +44,15 @@ class SATicketController extends Controller
     {
         $ticket = new Ticket;
         $ticket->user_id = Auth::user()->id;
-        $ticket->department = $request->department;
-        $ticket->level = $request->level;
+        $ticket->department_id = $request->department_id;
+        $ticket->level_id = $request->level_id;
         //  $tickets->name = $request->name;
         $ticket->subject = $request->subject;
         $ticket->message = $request->message;
         $ticket->uuid = Str::uuid();
         $ticket->save();
 
-        return redirect()->route('admin_ticket_index')->with('success','kaydedildi');
+        return to_route('superadmin.tickets.index')->with('success','kaydedildi');
 
     }
 
@@ -56,14 +61,7 @@ class SATicketController extends Controller
      */
     public function show($uuid)
     {
-        $ticket = Ticket::where('uuid',$uuid)->first();
-        //$note = Note::find($uuid);
-
-        /*     if($tickets->user_id != Auth::user()->id)
-             {
-                 abort(403);
-             }*/
-        return view('front.ticketPage.show',compact('ticket'));
+        //
     }
 
     /**
@@ -71,23 +69,34 @@ class SATicketController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Ticket $ticket)
     {
-        //
+        $tickets = $request->validate(
+            [
+                'level_id' => 'required' ,
+            ],
+            [
+                'level_id.required' => 'seviye boş bırakılamaz.',
+            ]);
+        $ticket->level_id = $request->level_id ;
+        $ticket->update($tickets);
+
+        return to_route('superadmin.tickets.index')->with('success','Talep başarıyla güncellendi.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ticket $ticket)
     {
-        //
+        $ticket->delete();
+        return to_route('superadmin.tickets.index')->with('delete','Talep başarıyla silindi.');
     }
 }
 
