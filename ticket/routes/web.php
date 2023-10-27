@@ -8,6 +8,8 @@ use App\Http\Controllers\SuperAdmin\SATicketController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminTicketController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,7 +67,13 @@ Route::middleware(['auth','role:Super-Admin'])->name('superadmin.')->prefix('sup
     Route::delete('/permission/{permission}/roles/{role}' , [PermissionController::class , 'removeRole'])->name('permissions.roles.remove');
 
 });
+Route::middleware(['auth','role:Admin'])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class,'index'])->name('index');
 
+    Route::resource('/tickets',AdminTicketController::class);
+    Route::delete('/tickets/{ticket}' , [AdminTicketController::class , 'destroy'])->name('tickets.destroy');
+    Route::get('/myTickets',[AdminTicketController::class,'myTickets'])->name('tickets.myTickets');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -77,11 +85,16 @@ Route::middleware([
     Route::get('/userhome', function () {
         return view('front.index');
     })->name('user_home');
-    Route::get('/index',[TicketController::class,'index'])->name('ticket_index');
+
+
+    Route::resource('/tickets',TicketController::class);
+    Route::delete('/tickets/{ticket}' , [TicketController::class , 'destroy'])->name('tickets.destroy');
+   /* Route::get('/index',[TicketController::class,'index'])->name('ticket_index');
     Route::get('/create',[TicketController::class,'create'])->name('ticket_create');
     Route::post('/store',[TicketController::class,'store'])->name('ticket_store');
     Route::get('/show/{id}',[TicketController::class,'show'])->name('ticket_show');
     Route::get('/edit/{id}',[TicketController::class,'edit'])->name('ticket_edit');
     Route::post('/update',[TicketController::class,'update'])->name('ticket_update');
     Route::get('/delete/{id}',[TicketController::class,'destroy'])->name('ticket_delete');
+   */
 });

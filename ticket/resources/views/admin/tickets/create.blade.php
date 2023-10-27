@@ -1,8 +1,8 @@
-@extends('front.layout.app')
+@extends('admin.layout.app')
 @section('content')
     <h1>Destek Talebi</h1>
     <div class="card-body bg-light border-bottom">
-        <form action="{{route('tickets.store')}}" method="post">
+        <form action="{{route('admin.tickets.store')}}" method="post">
             @csrf
             <div class="form-group ">
                 <label for="department">Departman</label><br>

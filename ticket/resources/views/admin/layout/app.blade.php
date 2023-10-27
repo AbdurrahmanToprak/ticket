@@ -38,45 +38,28 @@
         <div class="display: inline-block  p-3 bg-light " style="width: 280px;">
             <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                <span class="fs-4">SuperAdmin-Panel</span>
+                <span class="fs-4">Admin-Panel</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="{{route('superadmin.index')}}" class="nav-link active" aria-current="page">
+                    <a href="{{route('admin.index')}}" class="nav-link active" aria-current="page">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('superadmin.tickets.index')}}" class="nav-link link-dark">
+                    <a href="{{route('admin.tickets.index')}}" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                         Talepler
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('superadmin.users.index')}}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                        Kullanıcılar
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('superadmin.roles.index')}}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                        Roller
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('superadmin.permissions.index')}}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        İzinler
-                    </a>
-                </li>
+
             </ul>
             <hr>
 
 
-                </ul>
+            </ul>
 
         </div>
         <div class="display: inline-block position-absolute mt-4 " style="width: 1600px">@yield('content')</div>

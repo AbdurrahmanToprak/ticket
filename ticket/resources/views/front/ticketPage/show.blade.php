@@ -6,7 +6,7 @@
     <p class="pt-3 " style="word-break: break-all">{{$ticket->subject}}</p>
     <span class="block fs-6 text-muted mt-3 opacity-75 ">{{$ticket->updated_at->diffForHumans()}}</span>
     <div class="d-flex justify-content-end">
-        <a class="btn btn-info mb-3 " href="{{route('ticket_index')}}">Geri Dön</a>
+        <a class="btn btn-info mb-3 " href="{{route('tickets.index')}}">Geri Dön</a>
 
     </div>
 </div>

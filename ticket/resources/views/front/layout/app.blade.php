@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('ticket_index')}}" class="nav-link link-dark">
+                    <a href="{{route('tickets.index')}}" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                         Taleplerim
                     </a>

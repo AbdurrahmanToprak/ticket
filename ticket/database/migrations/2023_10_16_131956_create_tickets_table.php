@@ -17,8 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
             $table->uuid('uuid');
-            $table->string('department',150)->nullable();
-            $table->string('level',150)->nullable();
             $table->string('subject',150)->nullable();
             $table->text('message')->nullable();
         //    $table->enum('status',['0','1'])->default('1');

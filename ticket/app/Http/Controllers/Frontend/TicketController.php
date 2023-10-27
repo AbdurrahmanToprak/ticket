@@ -50,7 +50,7 @@ class TicketController extends Controller
         $ticket->uuid = Str::uuid();
         $ticket->save();
 
-        return redirect()->route('ticket_index')->with('success','kaydedildi');
+        return to_route('tickets.index')->with('success','kaydedildi');
 
     }
 
@@ -72,20 +72,21 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Ticket $ticket)
     {
         //$ticket = Ticket::where('uuid',$uuid)->first();
-        $ticket = Ticket::find($id);
-        $departments = Department::all();
-        return view('front.ticketPage.edit',compact('ticket','departments'));
+       // $ticket = Ticket::find($id);
+
+       // $departments = Department::all();
+       // return view('front.ticketPage.edit',compact('ticket','departments'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request,Ticket $ticket)
     {
-        $request->validate(
+        /*$tickets = $request->validate(
             [
                 'subject' => 'required',
                 'content' => 'required',
@@ -95,21 +96,17 @@ class TicketController extends Controller
                 'content.required' => 'içerik alanı gereklidir.',
             ]
         );
-        $ticket = Ticket::find($request->id);
-        $ticket->department_id = $request->department_id;
-        $ticket->subject = $request->subject;
-        $ticket->message = $request->message;
-        $ticket->save();
-        return redirect()->route('ticket_index')->with('success','Talebiniz başarıyla güncellendi.');
+        $ticket->update($tickets);
+
+        return to_route('tickets.index')->with('success','Talebiniz başarıyla güncellendi.'); */
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ticket $ticket)
     {
-        $ticket = Ticket::find($id);
         $ticket->delete();
-        return redirect()->route('ticket_index')->with('delete','Talebiniz başarıyla silindi.');
+        return to_route('tickets.index')->with('delete','Talebiniz başarıyla silindi.');
     }
 }
